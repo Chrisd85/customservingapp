@@ -1,0 +1,9 @@
+/* Consistent styling for Net Carbs across preview, meal breakdown, and total nutrition */
+.net-carbs-box {
+    margin-left: 1rem;
+    font-weight: bold;
+}
+
+.net-carbs {
+    color: green;
+}

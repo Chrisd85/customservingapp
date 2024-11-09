@@ -1,0 +1,32 @@
+/* Nutrition box layout with content-based width */
+.nutrition-box {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    display: inline-block; /* Adjust width to content */
+}
+
+/* Grid layout for aligning labels and inputs vertically */
+.nutrition-grid {
+    display: grid;
+    grid-template-columns: repeat(5, min-content); /* Five columns with minimal width */
+    gap: 0.5rem;
+    text-align: center;
+}
+
+/* Label styling */
+.nutrition-grid label {
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Compact input fields below labels */
+.nutrition-grid input {
+    width: 60px; /* Reduced width for compact display */
+    padding: 0.2rem;
+    font-size: 0.9rem;
+    text-align: right;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
