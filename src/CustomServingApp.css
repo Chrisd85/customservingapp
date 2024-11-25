@@ -1,0 +1,185 @@
+/* Base styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f7fa;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Container for the four-panel layout */
+.four-panel-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+/* Saved Items panel styling */
+.saved-items-list {
+  width: 250px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+
+/* Ensure preview appears below name and button */
+.saved-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.preview {
+  display: block;
+  width: 100%; /* Ensures the preview occupies the full width below */
+  padding: 0.5rem;
+  border: 1px solid #e0e4e8;
+  border-radius: 5px;
+  background-color: #f9fafb;
+  margin-top: 0.5rem;
+}
+
+/* General card style for each panel */
+.serving-calculator, .meal-breakdown, .total-nutrition {
+  flex: 1;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+
+/* Styling for headings */
+h1, h2 {
+  font-size: 1.5rem;
+  color: #4a90e2;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #4a90e2;
+  padding-bottom: 0.5rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+  color: #4a90e2;
+  margin-bottom: 0.8rem;
+}
+
+/* Specific layout for the Nutrition per Serving grid */
+.nutrition-box .nutrition-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Five equal columns */
+  gap: 1rem;
+}
+
+/* Adjusting input width within Nutrition per Serving */
+.nutrition-grid input[type="number"] {
+  width: 80px;
+  padding: 0.4rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: right;
+}
+
+/* Nutrition Preview styling */
+.preview-box {
+  background-color: #eaf5ff;
+  border-left: 4px solid #4a90e2;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+/* Styling for labels and inputs in ServingForm */
+.input-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+input[type="number"], input[type="text"] {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease-in-out;
+}
+
+input[type="number"]:focus, input[type="text"]:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+
+/* Meal breakdown list styling */
+.meal-breakdown ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Each item in Meal Breakdown */
+.meal-breakdown li {
+  background-color: #f9fafb;
+  padding: 1rem;
+  border: 1px solid #e0e4e8;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* Ensure each <div> inside .meal-item stacks vertically */
+.meal-item div {
+  display: block;
+  margin: 0.5rem 0;
+}
+
+/* Button styling within meal-item */
+.meal-item button {
+  display: block;
+  margin-top: 0.5rem;
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.meal-item button:hover {
+  background-color: #d9363e;
+}
+
+/* Net Carbs styling */
+.net-carbs {
+  color: #4caf50;
+}
+
+/* Button styling for Save and Load buttons */
+button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #357abd;
+}
+
+/* Bold labels in Total Nutrition, Meal Breakdown, and Nutrition Preview */
+strong {
+  font-weight: bold;
+}
