@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ServingForm from './ServingForm';
 import MealSummary from './MealSummary';
 import './CustomServingApp.css';
@@ -13,8 +13,14 @@ function CustomServingApp() {
         protein: 0,
         netCarbs: 0,
     });
-    const [savedItems, setSavedItems] = useState([]); 
+    const [savedItems, setSavedItems] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
+
+    // Load saved items from LocalStorage on initialization
+    useEffect(() => {
+        const storedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
+        setSavedItems(storedItems);
+    }, []);
 
     const addToMeal = (adjustedNutrition) => {
         setMeal([...meal, adjustedNutrition]);
@@ -28,32 +34,20 @@ function CustomServingApp() {
         }));
     };
 
-    const removeFromMeal = (index) => {
-        const removedItem = meal[index];
-        const updatedMeal = meal.filter((_, i) => i !== index);
-
-        setMeal(updatedMeal);
-        setTotalNutrition(prevTotal => ({
-            calories: prevTotal.calories - removedItem.calories,
-            fat: prevTotal.fat - removedItem.fat,
-            carbs: prevTotal.carbs - removedItem.carbs,
-            fiber: prevTotal.fiber - removedItem.fiber,
-            protein: prevTotal.protein - removedItem.protein,
-            netCarbs: prevTotal.netCarbs - removedItem.netCarbs,
-        }));
-    };
-
     const handleSaveItem = (item) => {
-        const { name, servingSize, calories, fat, carbs, fiber, protein, netCarbs } = item;
-        setSavedItems([...savedItems, { name, servingSize, calories, fat, carbs, fiber, protein, netCarbs }]);
+        const updatedItems = [...savedItems, item];
+        setSavedItems(updatedItems);
+        localStorage.setItem('savedItems', JSON.stringify(updatedItems));
     };
 
-    const togglePreview = (item) => {
-        setSelectedItem(selectedItem === item ? null : item); // Toggle preview for the clicked item
+    const handleItemClick = (item) => {
+        setSelectedItem(selectedItem === item ? null : item); // Toggle preview
     };
 
-    const handleLoadItem = (item) => {
-        setSelectedItem(item); // Load the item’s information into the form
+    const handleRemoveItem = (index) => {
+        const updatedItems = savedItems.filter((_, i) => i !== index);
+        setSavedItems(updatedItems);
+        localStorage.setItem('savedItems', JSON.stringify(updatedItems));
     };
 
     return (
@@ -65,12 +59,17 @@ function CustomServingApp() {
                         <li key={index} className="saved-item">
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                 <span 
-                                    onClick={() => togglePreview(item)} 
+                                    onClick={() => handleItemClick(item)} 
                                     style={{ cursor: 'pointer', fontWeight: 'bold' }}
                                 >
                                     {item.name}
                                 </span>
-                                <button onClick={() => handleLoadItem(item)}>Load</button>
+                                <button 
+                                    onClick={() => handleRemoveItem(index)} 
+                                    style={{ marginLeft: '0.5rem', backgroundColor: '#ff4d4f', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}
+                                >
+                                    Remove
+                                </button>
                             </div>
                             {selectedItem === item && (
                                 <div className="preview">
@@ -92,7 +91,7 @@ function CustomServingApp() {
                 <ServingForm onAddToMeal={addToMeal} onSaveItem={handleSaveItem} loadedItem={selectedItem} />
             </div>
             <div className="meal-breakdown">
-                <MealSummary meal={meal} onRemove={removeFromMeal} />
+                <MealSummary meal={meal} onRemove={handleRemoveItem} />
             </div>
             <div className="total-nutrition">
                 <h2>Total Nutrition</h2>
